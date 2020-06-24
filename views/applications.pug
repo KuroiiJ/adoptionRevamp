@@ -1,0 +1,19 @@
+extends layout
+
+include mixins/_storeCard
+
+block content
+    .inner
+        h2 Current Applications
+        .stores
+            
+        
+        table(style='width:100%', border='1')
+                tr      
+                    th Id
+                    th Name
+                    th Age
+                    each app in applications
+                        +storeCard(app)
+
+                

@@ -4,20 +4,24 @@ const storeController = require('../controllers/storeController')
 const userController = require('../controllers/userController')
 const authController = require('../controllers/authController')
 const reviewController = require('../controllers/reviewController')
+const applicationController = require('../controllers/applicationController')
 
 // Do work here
 
  const { catchErrors } = require('../handlers/errorHandlers')
 
-router.get('/', catchErrors(storeController.getStores));
+router.get('/', catchErrors(applicationController.getApplications));
 router.get('/stores', catchErrors(storeController.getStores));
 router.get('/stores/:slug', catchErrors(storeController.getSingleStore));
 router.get('/add', authController.isLoggedIn, storeController.addStore)
-router.post('/add', 
-    storeController.upload,
-    catchErrors(storeController.resize),
-    catchErrors(storeController.createStore)
+router.post('/add/application', 
+    catchErrors(applicationController.createApplication)
     )
+// router.post('/add', 
+//     storeController.upload,
+//     catchErrors(storeController.resize),
+//     catchErrors(storeController.createStore)
+//     )
 router.post('/add/:id', 
     storeController.upload,
     catchErrors(storeController.resize),
