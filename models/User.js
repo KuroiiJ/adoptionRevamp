@@ -54,13 +54,15 @@ const userSchema = new Schema({
             required: 'You Must Supply An Address'
         }
     },
-    profile : {
+    profile: {
         type: {
             type: String,
+            default: 'Point'
         },
         occupation: {
             type: String,
-            trim: true
+            trim: true,
+            default: "Job work"
         },
         // phone: {
         //     type: String,
@@ -73,29 +75,35 @@ const userSchema = new Schema({
         //     required: [true, 'User phone number required']
         // },
     
-        allergies : {
+        allergies: {
             type: String,
             default: "Off"
         },
-        otherAnimals : {
-            type : String
+        animals: {
+            have: {
+            type: String
+            },
+            description: {
+                type: String,
+                default: "none"   
+            }
         },
         household: {
-            type: String
+            type: String,
+            default: "houssssehold"
         },
         children: {
             type: String,
-            haveChildren : {
+            haveChildren: [{
                 type: Boolean,
-                ageRange : {
+                ageRange: {
                     type: String
                 }
-            },
-            wantChildren : {
-                type: Boolean
-
+            }],
+            wantChildren: {
+                type: Boolean,
+                default: false
             }
-            
         }
     },
     fosterParent : {

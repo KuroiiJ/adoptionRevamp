@@ -1,12 +1,11 @@
 mixin storeCard(app = {})
-    
-    tr
-        a(href=`/applications/${app.id}`)
-            td #{app._id}
-        a(href=`/applications/${app.id}`)
-            td #{app.author}
-        a(href=`/applications/${app.id}`)
-            td dog dog
+        tr
+            td
+                a(href=`/applications/${app.id}`) #{app.author}
+            td
+                a(href=`/applications/${app.id}`) dog dog 
+            td
+                a(href=`/applications/${app.id}`) #{app.status}
 
 
             //- .store__actions

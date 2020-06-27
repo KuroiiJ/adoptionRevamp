@@ -13,11 +13,19 @@ html
             li.nav__item
               a.nav__link.nav__link--logo(href="/")
                 != h.icon('beagle')
-            each item in h.menu
-              li.nav__item
-                a.nav__link(href=item.slug, class=(currentPath.startsWith(item.slug) ? 'nav__link--active' : ''))
-                  != h.icon(item.icon)
-                  span #{item.title}
+            if user && user.isAdmin
+              
+              each item in h.adminMenu
+                li.nav__item
+                  a.nav__link(href=item.slug, class=(currentPath.startsWith(item.slug) ? 'nav__link--active' : ''))
+                    != h.icon(item.icon)
+                    span #{item.title}
+            else
+              each item in h.menu
+                li.nav__item
+                  a.nav__link(href=item.slug, class=(currentPath.startsWith(item.slug) ? 'nav__link--active' : ''))
+                    != h.icon(item.icon)
+                    span #{item.title}
           .nav__section.nav__section--search
             .search
               input.search__input(type="text" placeholder="Dog, name..." name="search")
