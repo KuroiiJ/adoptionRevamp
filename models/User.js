@@ -90,20 +90,16 @@ const userSchema = new Schema({
         },
         household: {
             type: String,
-            default: "houssssehold"
+            default: "Just me in the home"
         },
         children: {
-            type: String,
-            haveChildren: [{
-                type: Boolean,
-                ageRange: {
-                    type: String
+            have: {
+                type: String
+                },
+            description: {
+                type: String,
+                default: "no children"   
                 }
-            }],
-            wantChildren: {
-                type: Boolean,
-                default: false
-            }
         }
     },
     fosterParent : {

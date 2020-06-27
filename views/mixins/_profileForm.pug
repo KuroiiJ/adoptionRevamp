@@ -9,13 +9,22 @@ mixin profileForm()
         input(name="user.location.address" type="user.location.address" disabled=true value=`${user.location.address}`)
         label(for="user.phone") Phone:
         input(name="user.phone" type="user.phone" disabled=true value=`${user.phone}`)
+
+        //more about user
         label(for="occupation") What's your current occupation?
         input(type='occupation' name='occupation' value=`${user.profile.occupation}`)
         
+        //animals in home
+        ul.tags
+            .tag.tag__choice
+                input(type="checkbox" id=user.profile.animals.have value=user.profile.animals.have name="animalsHave" checked=(user.profile.animals.have))
+                label(for="profile.children") Do you have, or are you planning to, have children?
 
         label(for="animalsDesc") Please describe the other animals in your home (types and personality):
-        input(type='animalsDesc' name='animalsDesc' value=`${user.profile.animals.description}`)
-        label(for="user.household") Please describe all people who live in your home:
+        textarea(name="animalsDesc" placeholder=`${user.profile.animals.description}`)
+
+        //people in home
+        label(for="user.household") Please describe all adults in your home:
         input(type='user.profile.household' name='user.profile.household')
         
         ul.tags

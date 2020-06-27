@@ -49,10 +49,13 @@ exports.account = async (req, res) => {
 exports.updateAccount = async (req, res) => {
 
     const test = await User.findOne({_id: req.user._id})
-    console.log("TESDSJLKF", test.profile.occupation)
     console.log("SDKJHFSKDJLHFSDKJHFKLJSDHFKSD", req.body)
-    test.profile.occupation = req.body.occupation
-    test.profile.animals.description = req.body.animalsDesc
+    //TODO find a graceful way to do the below
+        test.profile.occupation = req.body.occupation
+        test.profile.animals.have = req.body.animalsHave
+        test.profile.animals.description = req.body.animalsDesc
+        
+    
 
     const user = await User.findOneAndUpdate({
         _id: req.user._id}, test,
