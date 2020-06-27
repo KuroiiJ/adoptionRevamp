@@ -4,7 +4,27 @@ include mixins/_storeCard
 
 block content
     .inner
-        h2 Stores
+        h2 Current Applications
         .stores
             each store in stores
                 +storeCard(store)
+        
+        table(style='width:100%', border='1')
+                tr      
+                    th 
+                        a(href=`/add`) Id
+                    th Name
+                    th Age
+                    
+                tr
+                    td 001
+                    td Adam
+                    td 25
+                tr
+                    td 002
+                    td rahul
+                    td 27
+                tr
+                    td 003
+                    td john
+                    td 80

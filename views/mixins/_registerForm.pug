@@ -9,5 +9,20 @@ mixin registerForm()
         input(type='password' name='password')
         label(for="password-confirm") Confirm Password
         input(type='password' name='password-confirm')
-        input.button(type="submit" value="Create Account")
+        label(for="phone") Phone Number
+        input(type='phone' name='phone')
+        label(for="birthDate") Birth Date (YYYY-MM-DD)
+        input(type='birthDate' name='birthDate')
+        label(for="address") Address
+        input(type="text" id="address" name="location[address]")
+        label(for="lng") Address Lng
+        input(type="text" id="lng" name="location[coordinates][0]")
+        label(for="lat") Address Lat
+        input(type="text" id="lat" name="location[coordinates][1]")
+                
     
+        input.button(type="submit" value="Create Account")
+
+
+
+
