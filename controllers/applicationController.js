@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const Store = mongoose.model('Store')
 const User = mongoose.model('User')
 const Application = mongoose.model('Application')
+const Dog = mongoose.model('Dog')
 
 
 exports.homePage = (req, res) => {
@@ -12,27 +13,35 @@ exports.homePage = (req, res) => {
     res.render('index', {title: 'Home'})
 }
 
-exports.addStore = (req, res) => {
-    res.render('editStore', {title: 'Create Application'})
+exports.addApplication = async (req, res) => {
+    const dogs = await Dog.find()
+    res.render('addApplication', {title: 'Create Application', dogs})
 }
 
 
 exports.createApplication = async (req, res) => {
-        req.body.author = req.user._id
-        await (new Application(req.body)).save()
-        req.flash('success', `Successfully Sent Application.`)
-        res.redirect('back')
+    console.log("APPPPPPPP", req.body)
+    req.body.author = req.user._id
+    await (new Application(req.body)).save()
+    req.flash('success', `Successfully Sent Application.`)
+    res.redirect('back')
 }
 
 exports.getApplications = async (req, res) => {
+  if(req.user.isAdmin) {
    const applications = await Application.find()
    res.render('applications', {title: 'Current Applications', applications})
+  }
+  else {
+  const applications = await Application.find({ author: req.user._id })
+   res.render('applications', {title: 'Current Applications', applications})
+  }
 }
 
-exports.getSingleStore = async (req, res, next) => {
-    const store = await Store.findOne({slug: req.params.slug}).populate('author reviews')
-    if(!store) return next()
-    res.render('store', {title: `${store.name}`, store} )
+exports.getSingleApp = async (req, res, next) => {
+    const app = await Application.findOne({id: req.params._id}).populate('author dog')
+    if(!app) return next()
+    res.render('application', {title: `${app.author.name} wants ${app.dog.name}`, app} )
 }
 
 const confirmOwner = (store, user) => {
@@ -41,11 +50,11 @@ const confirmOwner = (store, user) => {
     }
 }
 
-exports.editStore = async (req, res) => {
-    const store = await Store.findOne({_id: req.params.id})
-    confirmOwner(store, req.user)
-    res.render('editStore', {title: `Edit ${store.name}`, store} )
-}
+// exports.editStore = async (req, res) => {
+//     const store = await Store.findOne({_id: req.params.id})
+//     confirmOwner(store, req.user)
+//     res.render('editStore', {title: `Edit ${store.name}`, store} )
+// }
 
 exports.updateStore = async (req, res) => {
     req.body.location.type = 'Point'

@@ -1,0 +1,23 @@
+mixin dogForm()
+    form(action=`/add/dog/` method="POST" class="card" enctype="multipart/form-data")
+        label(for="name") Name
+        input(type="text" name="name")
+        label(for="breed") Breed
+        textarea(name="breed")
+
+        label(for="photo") Photo    
+            input(type="file" name="photo" id="photo" accept="image/gif, image/png, image/jpeg")
+
+        label(for="location") KK9 Center Location
+        input(type="text" id="location" name="location")
+        
+        - const choices = ['Fearful', 'Puppy', 'Car Sick', 'Flight Risk', 'Good with Cats', 'Good with kids']
+        - const tags = []
+        ul.tags
+            each choice in choices 
+                .tag.tag__choice
+                    input(type="checkbox" id=choice value=choice name="tags" checked=(tags.includes(choice)))
+                    label(for=choice) #{choice}
+        input(type="submit" value="Save" class="button")
+            
+      

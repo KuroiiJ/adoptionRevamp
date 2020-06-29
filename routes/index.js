@@ -5,31 +5,37 @@ const userController = require('../controllers/userController')
 const authController = require('../controllers/authController')
 const reviewController = require('../controllers/reviewController')
 const applicationController = require('../controllers/applicationController')
+const dogController = require('../controllers/dogController')
 
 // Do work here
 
  const { catchErrors } = require('../handlers/errorHandlers')
 
-router.get('/', catchErrors(applicationController.getApplications));
-router.get('/stores', catchErrors(storeController.getStores));
-router.get('/stores/:slug', catchErrors(storeController.getSingleStore));
-router.get('/add', authController.isLoggedIn, storeController.addStore)
+router.get('/', authController.isLoggedIn, catchErrors(applicationController.getApplications));
+router.get('/applications', authController.isLoggedIn, catchErrors(applicationController.getApplications));
+// router.get('/stores', catchErrors(storeController.getStores));
+// router.get('/stores/:slug', catchErrors(storeController.getSingleStore));
+router.get('/add', authController.isLoggedIn, authController.hasCompleteProfile, applicationController.addApplication)
 router.post('/add/application', 
     catchErrors(applicationController.createApplication)
     )
-// router.post('/add', 
+router.get('/add/dog', authController.isLoggedIn, authController.isAdmin, dogController.addDog)
+router.post('/add/dog/', 
+    authController.isLoggedIn, 
+    authController.isAdmin, 
+    dogController.upload,
+    catchErrors(dogController.resize),
+    dogController.createDog
+    )
+
+// router.post('/add/:id', 
 //     storeController.upload,
 //     catchErrors(storeController.resize),
-//     catchErrors(storeController.createStore)
+//     catchErrors(storeController.updateStore)
 //     )
-router.post('/add/:id', 
-    storeController.upload,
-    catchErrors(storeController.resize),
-    catchErrors(storeController.updateStore)
-    )
-router.get('/stores/:id/edit', catchErrors(storeController.editStore));
-router.get('/tags/', catchErrors(storeController.getStoresByTag))
-router.get('/tags/:tag', catchErrors(storeController.getStoresByTag))
+// router.get('/stores/:id/edit', catchErrors(storeController.editStore));
+// router.get('/tags/', catchErrors(storeController.getStoresByTag))
+// router.get('/tags/:tag', catchErrors(storeController.getStoresByTag))
 
 router.get('/login', userController.loginForm)
 router.post('/login', authController.login)

@@ -11,29 +11,47 @@ mixin profileForm()
         input(name="user.phone" type="user.phone" disabled=true value=`${user.phone}`)
 
         //more about user
-        label(for="occupation") What's your current occupation?
-        input(type='occupation' name='occupation' value=`${user.profile.occupation}`)
+        p Tell us about you
+        label(for="occupationJob") What's your current occupation?
+        input(type='occupationJob' name='occupationJob' required value=`${user.profile.occupation.job}`)
+
+        label(for="occupationSchedule") Please describe your normal (pre & post Covid-19) work schedule:
+        textarea(type='occupationSchedule' name='occupationSchedule' required).form-control.
+            #{user.profile.occupation.schedule}
+
+        //people in home
+        p Tell us about your household
+        label(for="adultsNumber") How many people live in your home?
+        input(type='adultsNumber' name='adultsNumber' required value=`${user.profile.householdAdults.number}`)
+
+        label(for="adultsDescription") Please describe all adults in your home:
+        textarea(name='adultsDescription' required).form-control.
+            #{user.profile.householdAdults.description}
+        
+        ul.tags
+            .tag.tag__choice
+                input(type="checkbox" id=user.profile.children.have name="childrenHave" checked=(user.profile.children.have))
+                label(for="childrenHave") Do you currently, or are you planning to, have children?
+        
+        label(for="childrenDesc") What are the ages and personalities of the children in your home:
+        textarea(name="childrenDesc" required ).form-control.
+            #{user.profile.children.description}
+
+        ul.tags
+            .tag.tag__choice
+                input(type="checkbox" id=user.profile.allergies name="childrenHave" checked=(user.profile.allergies))
+                label(for="profile.allergies") Does anyone in your home have dog allergies?
         
         //animals in home
         ul.tags
             .tag.tag__choice
                 input(type="checkbox" id=user.profile.animals.have value=user.profile.animals.have name="animalsHave" checked=(user.profile.animals.have))
-                label(for="profile.children") Do you have, or are you planning to, have children?
+                label(for="profile.animals") Are there other animals in your home?
 
-        label(for="animalsDesc") Please describe the other animals in your home (types and personality):
-        textarea(name="animalsDesc" placeholder=`${user.profile.animals.description}`)
-
-        //people in home
-        label(for="user.household") Please describe all adults in your home:
-        input(type='user.profile.household' name='user.profile.household')
-        
-        ul.tags
-            .tag.tag__choice
-                input(type="checkbox" name="profile.children" checked=false)
-                label(for="profile.children") Do you have, or are you planning to, have children?
-                input(type="checkbox" name="profile.allergies" checked=true)
-                label(for="profile.allergies") Do you, or anyone in your home, have dog allergies?
-    
+        label(for="animalsDesc") Please describe any other animals in your home (types and personality):
+        textarea(name="animalsDesc" required).form-control.
+            #{user.profile.animals.description}
+              
         input.button(type="submit" value="Create Profile")
 
 

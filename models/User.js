@@ -55,51 +55,53 @@ const userSchema = new Schema({
         }
     },
     profile: {
-        type: {
-            type: String,
-            default: 'Point'
+        complete: {
+            type: Boolean,
+            default: false
         },
         occupation: {
-            type: String,
-            trim: true,
-            default: "Job work"
+            job: {
+                type: String,
+                trim: true,
+                default: "Job work"
+            },
+            schedule: {
+                type: String,
+                default: "9-5 M-F in Office"
+            }
         },
-        // phone: {
-        //     type: String,
-        //     validate: {
-        //       validator: function(v) {
-        //         return /\d{3}-\d{3}-\d{4}/.test(v);
-        //       },
-        //       message: `Not a valid phone number!`
-        //     },
-        //     required: [true, 'User phone number required']
-        // },
-    
         allergies: {
             type: String,
             default: "Off"
         },
         animals: {
             have: {
-            type: String
+                type: String
             },
             description: {
                 type: String,
                 default: "none"   
             }
         },
-        household: {
-            type: String,
-            default: "Just me in the home"
+        householdAdults: {
+            number: {
+                type: Number,
+                default: 1
+            },
+            description: {
+                type: String,
+                default: "Just me"   
+            }
+
         },
         children: {
             have: {
                 type: String
-                },
+            },
             description: {
                 type: String,
                 default: "no children"   
-                }
+            }
         }
     },
     fosterParent : {
@@ -133,9 +135,14 @@ const userSchema = new Schema({
    
 // })
 
-userSchema.pre('save', async function(next) {
-    console.log(this) 
-})
+// userSchema.pre('save', async function(next) {
+//     console.log(this) 
+// })
+
+// userSchema.pre('findOneAndUpdate', async function() {
+//     const docToUpdate = await this.model.findOne(this.getQuery());
+//     docToUpdate.profile.complete = true
+//  });
 
 
 userSchema.virtual('gravatar').get(function() {

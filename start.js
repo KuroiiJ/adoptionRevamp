@@ -23,6 +23,7 @@ require('./models/Store')
 require('./models/User')
 require('./models/Review')
 require('./models/Application')
+require('./models/Dog')
 
 // Start app
 const app = require('./app');

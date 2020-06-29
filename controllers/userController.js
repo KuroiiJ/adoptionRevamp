@@ -46,14 +46,21 @@ exports.account = async (req, res) => {
     res.render('account', {applications, title: 'Edit Your Account'})
 }
 
+
 exports.updateAccount = async (req, res) => {
 
     const test = await User.findOne({_id: req.user._id})
-    console.log("SDKJHFSKDJLHFSDKJHFKLJSDHFKSD", req.body)
+    // console.log("REQ BOOOOOODY", req.body, "FKJSDLFKJSDLKJFSDLKJFLSDJ", test)
     //TODO find a graceful way to do the below
-        test.profile.occupation = req.body.occupation
+        test.profile.occupation.job = req.body.occupationJob
+        test.profile.occupation.schedule = req.body.occupationSchedule
         test.profile.animals.have = req.body.animalsHave
         test.profile.animals.description = req.body.animalsDesc
+        test.profile.children.have = req.body.childrenHave
+        test.profile.children.description = req.body.childrenDesc
+        test.profile.householdAdults.number = req.body.adultsNumber
+        test.profile.householdAdults.description = req.body.adultsDescription
+        test.profile.complete = true
         
     
 

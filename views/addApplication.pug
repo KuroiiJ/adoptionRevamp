@@ -1,0 +1,12 @@
+extends layout
+
+include mixins/_storeForm
+include mixins/_applicationForm
+
+
+block content
+    .inner 
+        pre= h.dump(dogs)
+        h2= title
+        // h2 #{title}
+        +applicationForm(application, dogs)

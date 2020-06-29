@@ -45,15 +45,6 @@ const applicationSchema = new mongoose.Schema({
         trim: true,
         required: false
     },
-    otherAnimals : {
-        type: String,
-        trim: true,
-        required: false
-    },
-    workSchedule : {
-        type: String,
-        trim: true
-    },
     food : {
         type: String,
         trim: true
@@ -66,11 +57,11 @@ const applicationSchema = new mongoose.Schema({
         ref: 'User',
         required: 'You must supply an author'
     },
-    // dog: {
-    //     type: mongoose.Schema.ObjectId, 
-    //     ref: 'Dog',
-    //     required: 'You must supply a dog'
-    // }
+    dog: {
+        type: mongoose.Schema.ObjectId, 
+        ref: 'Dog',
+        required: 'You must supply a dog'
+    }
 }, {
         //mongoose: do these to automatically include virtuals when calling stores
         toJSON: { virtuals: true },
@@ -92,13 +83,12 @@ applicationSchema.index({
 
 //hooks
 
-//create unique slugs!
-applicationSchema.pre('save', async function(next) {
-    console.log(this.author)
+// applicationSchema.pre('save', async function(next) {
+//     console.log(this.author)
     
-     next()
+//      next()
    
-})
+// })
 
 
 
@@ -107,14 +97,22 @@ applicationSchema.pre('save', async function(next) {
 
 
 //link to reviews **This is Mongoose Specific** 
-applicationSchema.virtual('reviews', {
-    ref: 'Review',
+
+// applicationSchema.virtual('reviews', {
+//     ref: 'Review',
+//     localField: '_id',
+//     foreignField: 'store'
+// })
+
+applicationSchema.virtual('dogs', {
+    ref: 'Dog',
     localField: '_id',
-    foreignField: 'store'
+    foreignField: 'application'
 })
 
 function autopopulate(next) {
-    this.populate('reviews')
+    this.populate('author')
+    // this.populate('dog')
     next()
 }
 

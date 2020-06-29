@@ -1,21 +1,13 @@
 mixin applicationForm(application = {})
-    form(action=`/add/application/${application._id || ''}` method="POST" class="card" enctype="multipart/form-data")
+    form.form(action=`/add/application/${application._id || ''}` method="POST" class="card" )
+        h2 Apply to adopt a currently available dog
+
         ul.tags
-            .tag.tag__choice
-                input(type="checkbox" name="landlordApproval" checked=false)
-                label(for="landlordApproval") Do you have permission from your landlord, in writing?
-                input(type="checkbox" name="esa" checked=false)
-                label(for="esa") Are you looking for an Emotional Service Animal?
-                input(type="checkbox" name="crateTraining" checked=false)
-                label(for="crateTraining") Will you continue to work on crate training with your dog?
-                input(type="checkbox" name="surrendReturnRehome" checked=false)
-                label(for="surrendReturnRehome") Have you ever surrendered, returned, or rehomed an animal?
-                input(type="checkbox" name="timeOff" checked=false)
-                label(for="timeOff") If needed, will you be able to take off time from work to help a dog get adjusted?
-                input(type="checkbox" name="resources" checked=false)
-                label(for="resources") Have you read the provided resources for potential adopters?
-                input(type="checkbox" name="training" checked=false)
-                label(for="training") Are you willing to complete the reccomended training?     
+            each dog in dogs
+                img(src=`/uploads/${dog.photo}`)
+                input(type="radio" required id=`${dog.name}` name='dog' value=`${dog._id}`)
+                label(for=`dog`) #{dog.name}
+
         label(for="otherRescues") Have you applied with other rescues recently? If so, which ones?
         input(type="text" name="otherRescues" value=application.otherRescues)
         label(for="otherAnimals") Describe all other animals in your home:

@@ -1,7 +1,7 @@
-mixin storeCard(app = {})
+mixin appCard(app = {})
         tr
             td
-                a(href=`/applications/${app.id}`) #{app.author}
+                a(href=`/applications/${app.id}`) #{app.author.name}
             td
                 a(href=`/applications/${app.id}`) dog dog 
             td

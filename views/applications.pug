@@ -1,6 +1,6 @@
 extends layout
 
-include mixins/_storeCard
+include mixins/_appCard
 
 block content
     .inner
@@ -13,6 +13,6 @@ block content
                     th Dog
                     th Status
                 each app in applications
-                    +storeCard(app)
+                    +appCard(app)
 
                 
