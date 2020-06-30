@@ -510,9 +510,12 @@ label {
 .form {
   background: white;
   padding: 2rem;
+  margin-top: 3rem; 
+  margin-bottom: 6rem; 
   box-shadow: linear-gradient(90deg, #48ded4 0%, #a026bf 20%, #e82c75 60%, #FFC40E 85%, #48ded4 95%); }
   .form + .form {
-    margin-top: 4rem; }
+    margin-top: 4rem;
+    }
   .form h2 {
     margin: 0;
     font-size: 2rem;
@@ -798,6 +801,7 @@ label {
   display: -ms-flexbox;
   display: flex;
   margin-bottom: 2rem;
+  margin-top: 2rem;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap; }
 

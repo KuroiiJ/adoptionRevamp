@@ -6,9 +6,9 @@
     "node": ">= 7.6.0"
   },
   "scripts": {
-    "start-dev": "node ./start.js",
+    "start": "node ./start.js",
     "watch": "nodemon ./start.js --ignore public/",
-    "start": "concurrently \"npm run watch\" \"npm run assets\" --names \"💻,📦\" --prefix name",
+    "start-dev": "concurrently \"npm run watch\" \"npm run assets\" --names \"💻,📦\" --prefix name",
     "assets": "webpack -w --display-max-modules 0",
     "sample": "node ./data/load-sample-data.js",
     "blowitallaway": "node ./data/load-sample-data.js --delete",
@@ -18,10 +18,12 @@
   "dependencies": {
     "axios": "^0.19.2",
     "body-parser": "^1.19.0",
+    "braces": "^3.0.2",
     "connect-flash": "0.1.1",
     "connect-mongo": "^3.2.0",
     "connect-mongodb-session": "^2.3.3",
     "cookie-parser": "1.4.3",
+    "deep-extend": "^0.6.0",
     "dompurify": "^2.0.11",
     "dotenv": "4.0.0",
     "es6-promisify": "5.0.0",
@@ -36,6 +38,7 @@
     "juice": "4.0.2",
     "load-bmfont": "^1.4.0",
     "md5": "2.2.1",
+    "minimist": "^1.2.5",
     "moment": "^2.24.0",
     "mongoose": "^5.9.6",
     "mongoose-mongodb-errors": "0.0.2",

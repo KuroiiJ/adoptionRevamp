@@ -1,0 +1,9 @@
+extends layout
+
+include mixins/_dogForm
+
+
+block content
+    .inner 
+        h2= title
+        +dogForm(dog)

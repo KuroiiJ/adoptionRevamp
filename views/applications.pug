@@ -1,0 +1,18 @@
+extends layout
+
+include mixins/_appCard
+
+block content
+    .inner
+        h2 Current Applications
+        .stores
+        
+        table(style='width:100%', border='1')
+                tr      
+                    th Name
+                    th Dog
+                    th Status
+                each app in applications
+                    +appCard(app)
+
+                

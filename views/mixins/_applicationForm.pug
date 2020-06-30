@@ -1,0 +1,30 @@
+mixin applicationForm(application = {})
+    form.form(action=`/add/application/${application._id || ''}` method="POST" class="card" )
+        h2 Apply to adopt a currently available dog
+
+        ul.tags
+            each dog in dogs
+                img(src=`/uploads/${dog.photo}`)
+                input(type="radio" required id=`${dog.name}` name='dog' value=`${dog._id}`)
+                label(for=`dog`) #{dog.name}
+
+        label(for="otherRescues") Have you applied with other rescues recently? If so, which ones?
+        input(type="text" name="otherRescues" value=application.otherRescues)
+        label(for="otherAnimals") Describe all other animals in your home:
+        input(type="text" name="otherAnimals" value=application.otherAnimals)
+        label(for="workSchedule") Describe you post and pre covid work schedule
+        input(type="text" name="workSchedule" value=application.workSchedule)
+        label(for="food") What type of food would you plan off feeding this dog?
+        input(type="text" name="food" value=application.food)
+
+        - const choices = ['Barking', 'Fear', 'Motion Sickness', 'Marking']
+        - const notOkayBehavior = application.notOkayBehavior || []
+        p Which of the following behaviors are not acceptable?  
+        ul.tags
+            each choice in choices 
+                .tag.tag__choice
+                    input(type="checkbox" id=choice value=choice name="tags" checked=(notOkayBehavior.includes(choice)))
+                    label(for=choice) #{choice}
+        input(type="submit" value="Save" class="button")
+            
+      

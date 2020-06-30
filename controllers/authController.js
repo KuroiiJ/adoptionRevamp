@@ -9,7 +9,7 @@ const mail = require('../handlers/mail')
 exports.login = passport.authenticate('local', {
     failureRedirect: '/login/',
     failureFlash: 'Failed Login',
-    successRedirect: '/',
+    successRedirect: '/account',
     successFlash: 'You are logged in!'
 }) 
 
@@ -23,8 +23,24 @@ exports.isLoggedIn = (req, res, next) => {
     if(req.isAuthenticated()) {
         next()
         return
-    } req.flash('error', 'You must be logged in to add a store!')
+    } req.flash('error', 'You must be logged in to do that!')
     res.redirect('/login')
+}
+
+exports.hasCompleteProfile = (req, res, next) => {
+    if(req.user.profile.complete) {
+        next()
+        return
+    } req.flash('error', 'You must complete your profile before filling out an application')
+    res.redirect('/account')
+}
+
+exports.isAdmin = (req, res, next) => {
+    if(req.user.isAdmin) {
+        next()
+        return
+    } req.flash('error', 'Only Admins can view this page')
+    res.redirect('/account')
 }
 
 exports.forgot = async (req, res) => {
