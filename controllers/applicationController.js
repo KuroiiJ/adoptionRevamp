@@ -3,7 +3,6 @@ const Store = mongoose.model('Store')
 const User = mongoose.model('User')
 const Application = mongoose.model('Application')
 const Dog = mongoose.model('Dog')
-const littleDog = 4
 
 
 exports.homePage = (req, res) => {
