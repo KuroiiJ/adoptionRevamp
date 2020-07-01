@@ -5,12 +5,12 @@ import { $ } from './bling'
 //TO DO: figure out navigator.geolocation.getCurrentPosition and replace these defaults
 
 const mapOptions = {
-    center: { lat: 43.2, lng: -79.8 },
+    center: { lat: 40.77, lng: -73.91 },
     zoom: 9
 }
 
-function loadPlaces(map, lat = 43.2, lng = -79.8) {
-    axios.get(`/api/stores/near?lat=${lat}&lng=${lng}`)
+function loadPlaces(map, lat = 40.77, lng = -73.91) {
+    axios.get(`/api/applications/near?lat=${lat}&lng=${lng}`)
     .then(res => {
         const places = res.data
         if(!places.length) {

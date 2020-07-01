@@ -1,12 +1,19 @@
 extends layout
 
-include mixins/_storeForm
-include mixins/_applicationForm
 
 
 block content
-    .inner 
-        pre= h.dump(dogs)
-        h2= title
-        // h2 #{title}
-        +applicationForm(application, dogs)
+    
+    include mixins/_storeForm
+    include mixins/_applicationForm
+
+    - const age = h.moment().diff(user.birthDate, 'years')
+    
+    if age >= 24
+        .inner 
+            h2= title
+            +applicationForm(application, dogs)
+    if age < 24
+        .inner 
+            h2 I'm sorry! You must be 24 or over to adopt
+            

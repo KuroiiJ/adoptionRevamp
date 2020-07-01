@@ -13,6 +13,7 @@ const dogController = require('../controllers/dogController')
 
 router.get('/', authController.isLoggedIn, catchErrors(applicationController.getApplications));
 router.get('/applications', authController.isLoggedIn, catchErrors(applicationController.getApplications));
+router.get('/applications/:id', catchErrors(applicationController.getSingleApp));
 // router.get('/stores', catchErrors(storeController.getStores));
 // router.get('/stores/:slug', catchErrors(storeController.getSingleStore));
 router.get('/add', authController.isLoggedIn, authController.hasCompleteProfile, applicationController.addApplication)
@@ -34,8 +35,8 @@ router.post('/add/dog/',
 //     catchErrors(storeController.updateStore)
 //     )
 // router.get('/stores/:id/edit', catchErrors(storeController.editStore));
-// router.get('/tags/', catchErrors(storeController.getStoresByTag))
-// router.get('/tags/:tag', catchErrors(storeController.getStoresByTag))
+router.get('/tags/', catchErrors(applicationController.getAppsByDog))
+router.get('/tags/:tag', catchErrors(applicationController.getAppsByDog))
 
 router.get('/login', userController.loginForm)
 router.post('/login', authController.login)
@@ -66,7 +67,7 @@ router.get('/top', catchErrors(storeController.getTopStores))
 */
 
 router.get('/api/search', catchErrors(storeController.searchStores))
-router.get('/api/stores/near', catchErrors(storeController.mapStores))
+router.get('/api/applications/near', catchErrors(applicationController.mapApplications))
 router.post('/api/stores/:id/heart', catchErrors(storeController.heartStore))
 
 

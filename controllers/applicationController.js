@@ -41,7 +41,7 @@ exports.getApplications = async (req, res) => {
 exports.getSingleApp = async (req, res, next) => {
     const app = await Application.findOne({id: req.params._id}).populate('author dog')
     if(!app) return next()
-    res.render('application', {title: `${app.author.name} wants ${app.dog.name}`, app} )
+    res.render('application', {title: `${app.author.name}`, app} )
 }
 
 const confirmOwner = (store, user) => {
@@ -75,6 +75,17 @@ exports.getStoresByTag = async (req, res) => {
     res.render('tag', {tags, title: 'Tags', tag, stores })
 }
 
+exports.getAppsByDog = async (req, res) => {
+  const dog = req.params.tag
+  const dogQuery = dog || { $exists: true }
+  console.log("YO", dogQuery)
+  const dogsPromise = Dog.find()
+  const appsPromise = Application.find({ dog: dogQuery })
+  const [dogs, apps] = await Promise.all([dogsPromise, appsPromise])
+ 
+  res.render('tag', {dogs, title: 'Tags', Dog, apps })
+}
+
 
 exports.searchStores = async (req, res) => {
     const stores = await Store
@@ -98,25 +109,29 @@ exports.searchStores = async (req, res) => {
     res.json(stores)
   }
 
-  exports.mapStores = async (req, res) => {
+  exports.mapApplications = async (req, res) => {
+ 
     const coordinates = [ req.query.lng, req.query.lat ].map(parseFloat)
+    console.log("YO", coordinates)
     const q = {
-      location: {
-        $near: {
-          $geometry: {
-            type: 'Point',
-            coordinates
-          },
-          $maxDistance: 10000 // = 10km
+        location: {
+          $near: {
+            $geometry: {
+              type: 'Point',
+              coordinates
+            },
+            $maxDistance: 1000000 // = 10km
+          }
         }
-      }
+      
     }
-  
-    const stores = await Store.find(q)
+    console.log("YO", q)
+    const stores = await User.find(q)
       // chain on the '.select' to specify which feilds you want
       // use '-' to exclude
-      .select('slug name description location photo')
-      .limit(10)
+      // .select('location name')
+      // .limit(20)
+    
     res.json(stores)
   }
 

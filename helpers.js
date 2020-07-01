@@ -26,10 +26,10 @@ exports.menu = [
 ];
 
 exports.adminMenu = [
-  { slug: '/applications', title: 'Applications', icon: 'store', },
+  { slug: '/applications', title: 'Home', icon: 'store', },
   { slug: '/tags', title: 'Tags', icon: 'tag', },
   { slug: '/top', title: 'Top', icon: 'top', },
-  { slug: '/add', title: 'Add', icon: 'add', },
+  { slug: '/add', title: 'Apply to Adopt', icon: 'add', },
   { slug: '/add/dog', title: 'Add Dog', icon: 'add', },
   { slug: '/map', title: 'Map', icon: 'map', },
 ];

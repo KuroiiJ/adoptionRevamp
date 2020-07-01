@@ -1,16 +1,20 @@
 extends layout
 
-include mixins/_storeCard
+include mixins/_appCard
 
 block content 
     .inner
-        h2 #{tag || 'Tags' }
+        h2 #{dog || 'Dogs' }
         ul.tags
-            each t in tags
+            each t in dogs
                 li.tag
                     a.tag__link(href=`/tags/${t._id}` class=(t._id === tag ? 'tag__link--active' : ''))
-                        span.tag__text= t._id
-                        span.tag__count= t.count
+                        span.tag__text= t.name
         .stores
-            each store in stores
-                +storeCard(store)
+            table(style='width:100%', border='1')
+                tr      
+                    th Name
+                    th Dog
+                    th Status
+                each app in apps
+                    +appCard(app)
