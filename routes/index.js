@@ -66,7 +66,7 @@ router.get('/top', catchErrors(storeController.getTopStores))
     API
 */
 
-router.get('/api/search', catchErrors(storeController.searchStores))
+router.get('/api/search', catchErrors(applicationController.searchApps))
 router.get('/api/applications/near', catchErrors(applicationController.mapApplications))
 router.post('/api/stores/:id/heart', catchErrors(storeController.heartStore))
 

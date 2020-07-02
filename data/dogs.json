@@ -1,0 +1,18 @@
+[{"_id":"53cb6b9b4f4ddef1ad47f943",
+"name":"Hondo",
+"breed":"Beagle",
+"traits":["fearful","good with cats"],
+"photo":"de2dd89f-14b5-465e-8dfd-1d34267e15d0.png", 
+"location":"New York",
+"slug":"hondo"
+},
+    
+[{"_id":"55153a8014829a865bbf700d",
+"name":"Dabin",
+"breed":"Jindo Akita",
+"traits":["fearful","good with kids"],
+"photo":"63878f8c-7aec-4284-a0c5-dc59f24204b6.jpeg",
+"location":"New York",
+"slug":"dabin"
+}
+]]

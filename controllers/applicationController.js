@@ -20,7 +20,6 @@ exports.addApplication = async (req, res) => {
 
 
 exports.createApplication = async (req, res) => {
-    console.log("APPPPPPPP", req.body)
     req.body.author = req.user._id
     await (new Application(req.body)).save()
     req.flash('success', `Successfully Sent Application.`)
@@ -39,7 +38,7 @@ exports.getApplications = async (req, res) => {
 }
 
 exports.getSingleApp = async (req, res, next) => {
-    const app = await Application.findOne({id: req.params._id}).populate('author dog')
+    const app = await Application.findOne({_id: req.params.id}).populate('author dog')
     if(!app) return next()
     res.render('application', {title: `${app.author.name}`, app} )
 }
@@ -66,14 +65,14 @@ exports.updateStore = async (req, res) => {
     res.redirect(`/stores/${store._id}/edit`)
 }
 
-exports.getStoresByTag = async (req, res) => {
-    const tag = req.params.tag
-    const tagQuery = tag || { $exists: true }
-    const tagsPromise = Store.getTagsList()
-    const storesPromise = Store.find({ tags: tagQuery })
-    const [tags, stores] = await Promise.all([tagsPromise, storesPromise])
-    res.render('tag', {tags, title: 'Tags', tag, stores })
-}
+// exports.getStoresByTag = async (req, res) => {
+//     const tag = req.params.tag
+//     const tagQuery = tag || { $exists: true }
+//     const tagsPromise = Store.getTagsList()
+//     const storesPromise = Store.find({ tags: tagQuery })
+//     const [tags, stores] = await Promise.all([tagsPromise, storesPromise])
+//     res.render('tag', {tags, title: 'Tags', tag, stores })
+// }
 
 exports.getAppsByDog = async (req, res) => {
   const dog = req.params.tag
@@ -87,26 +86,30 @@ exports.getAppsByDog = async (req, res) => {
 }
 
 
-exports.searchStores = async (req, res) => {
-    const stores = await Store
+exports.searchApps = async (req, res) => {
+  console.log(req.query)
+    const apps = await Application
       // find stores that match query
       .find(
         {
           $text: {
             $search: req.query.q
           }
-        },
-        {
-          score: { $meta: 'textScore' }
+          // email: req.query.q
         }
+        // ,
+        // {
+        //   score: { $meta: 'textScore' }
+        // }
       )
       // sort based on textScore
-      .sort({
-        score: { $meta: 'textScore' }
-      })
+      // .sort({
+      //   score: { $meta: 'textScore' }
+      // })
       // limit to 5 results
-      .limit(5)
-    res.json(stores)
+      // .limit(15)
+    console.log(apps)
+    res.json(apps)
   }
 
   exports.mapApplications = async (req, res) => {

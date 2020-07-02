@@ -118,6 +118,15 @@ const userSchema = new Schema({
 })
 
 
+//indexes
+userSchema.index({
+    location: '2dsphere',
+    name: 'text',
+    email: 'text'
+})
+
+
+
 //create unique slugs (pulled from store)!
 // userSchema.pre('save', async function(next) {
 //     if (!this.isModified('name')) {

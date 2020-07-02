@@ -72,13 +72,10 @@ const applicationSchema = new mongoose.Schema({
 //indexes
 
 applicationSchema.index({
-    name: 'text', 
-    description: 'text'
+    status: 'text'
 })
 
-applicationSchema.index({
-    location: '2dsphere'
-})
+
 
 
 //hooks
