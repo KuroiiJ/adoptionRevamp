@@ -38,7 +38,7 @@
     "juice": "4.0.2",
     "load-bmfont": "^1.4.0",
     "md5": "2.2.1",
-    "minimist": "^1.2.5",
+    "minimist": "^1.2.6",
     "moment": "^2.24.0",
     "mongoose": "^5.9.6",
     "mongoose-mongodb-errors": "0.0.2",
